@@ -63,8 +63,8 @@
 		11DAF8E521F5EB4200F6729D /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				11DAF8DC21F5EB2D00F6729D /* LaunchScreen.storyboard */,
 				11DAF8D721F5EB2D00F6729D /* Main.storyboard */,
+				11DAF8DC21F5EB2D00F6729D /* LaunchScreen.storyboard */,
 			);
 			path = UI;
 			sourceTree = "<group>";
