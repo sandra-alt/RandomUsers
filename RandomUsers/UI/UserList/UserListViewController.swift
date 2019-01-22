@@ -13,12 +13,20 @@ class UserListViewController: UITableViewController {
     private var users = [User]()
     private var currentPage = 1
     
+    private let userCellName = "UserListCell"
+    private let loadingCellName = "LoadingCell"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadUsers()
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
 
+        self.clearsSelectionOnViewWillAppear = false
+
+        let userNib = UINib(nibName: userCellName, bundle: nil)
+        tableView.register(userNib, forCellReuseIdentifier:userCellName)
+        
+        let loadingCellNib = UINib(nibName: "LoadingCell", bundle: nil)
+        tableView.register(loadingCellNib, forCellReuseIdentifier: loadingCellName)
+        
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
@@ -26,8 +34,10 @@ class UserListViewController: UITableViewController {
     func loadUsers() {
         let ns = NetworkService()
         ns.fetchUsers(forPage: currentPage, completion: { (users) in
-            self.users.append(contentsOf: users!)
-            self.tableView.reloadData()
+            DispatchQueue.main.async {
+                self.users.append(contentsOf: users!)
+                self.tableView.reloadData()
+            }
         })
     }
     
@@ -48,27 +58,35 @@ class UserListViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         if indexPath.row == users.count {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "LoadingCell", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: loadingCellName, for: indexPath) as! LoadingCell
+            cell.activityIndicator.startAnimating()
             return cell
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-            cell.textLabel?.text = users[indexPath.row].name.first
+            let cell = tableView.dequeueReusableCell(withIdentifier: userCellName, for: indexPath) as! UserListCell
+            cell.configureCellFor(user: users[indexPath.row])
             return cell
         }
     }
 
-//    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        loadUsers()
-//    }
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if tableView.contentOffset.y >= (tableView.contentSize.height - tableView.frame.size.height) {
+            loadUsers()
+            currentPage += 1
+        }
+    }
     
-    /*
+
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    private let segueIdentifier = "ShowUserDescription"
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: segueIdentifier, sender: self)
     }
-    */
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == segueIdentifier {
+        }
+    }
 
 }

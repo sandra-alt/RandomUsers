@@ -12,11 +12,7 @@ class NetworkService {
     
     fileprivate let session = URLSession(configuration: .default)
     private let baseURLString = "https://randomuser.me/api/?results=20&seed=abc&exc=login,registered,id,nat"
-    
-    func fetchUsers(completion: @escaping([User]?) -> Void){
-        self.fetchUsers(forPage: 1, completion: (completion))
-    }
-    
+
     func fetchUsers(forPage page: Int, completion: @escaping([User]?) -> Void){
         let url = URL(string: baseURLString + "&page=\(page)")
         

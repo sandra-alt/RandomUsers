@@ -14,6 +14,11 @@
 		11DAF8EA21F605CE00F6729D /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DAF8E921F605CE00F6729D /* NetworkService.swift */; };
 		11DAF8EC21F60FE800F6729D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DAF8EB21F60FE800F6729D /* User.swift */; };
 		11DAF8EE21F62E2400F6729D /* UserListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DAF8ED21F62E2400F6729D /* UserListViewController.swift */; };
+		11DAF8F121F651C800F6729D /* UIColor+Tints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DAF8F021F651C800F6729D /* UIColor+Tints.swift */; };
+		11DAF8F421F69EF500F6729D /* UserListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DAF8F221F69EF500F6729D /* UserListCell.swift */; };
+		11DAF8F521F69EF500F6729D /* UserListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11DAF8F321F69EF500F6729D /* UserListCell.xib */; };
+		11DAF8FB21F6CE1200F6729D /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DAF8F921F6CE1200F6729D /* LoadingCell.swift */; };
+		11DAF8FC21F6CE1200F6729D /* LoadingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11DAF8FA21F6CE1200F6729D /* LoadingCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +31,11 @@
 		11DAF8E921F605CE00F6729D /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		11DAF8EB21F60FE800F6729D /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		11DAF8ED21F62E2400F6729D /* UserListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListViewController.swift; sourceTree = "<group>"; };
+		11DAF8F021F651C800F6729D /* UIColor+Tints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Tints.swift"; sourceTree = "<group>"; };
+		11DAF8F221F69EF500F6729D /* UserListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListCell.swift; sourceTree = "<group>"; };
+		11DAF8F321F69EF500F6729D /* UserListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserListCell.xib; sourceTree = "<group>"; };
+		11DAF8F921F6CE1200F6729D /* LoadingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
+		11DAF8FA21F6CE1200F6729D /* LoadingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +83,7 @@
 				11DAF8EF21F62E2D00F6729D /* UserList */,
 				11DAF8D721F5EB2D00F6729D /* Main.storyboard */,
 				11DAF8DC21F5EB2D00F6729D /* LaunchScreen.storyboard */,
+				11DAF8F821F6AE0100F6729D /* Extensions */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -90,8 +101,20 @@
 			isa = PBXGroup;
 			children = (
 				11DAF8ED21F62E2400F6729D /* UserListViewController.swift */,
+				11DAF8F221F69EF500F6729D /* UserListCell.swift */,
+				11DAF8F321F69EF500F6729D /* UserListCell.xib */,
+				11DAF8F921F6CE1200F6729D /* LoadingCell.swift */,
+				11DAF8FA21F6CE1200F6729D /* LoadingCell.xib */,
 			);
 			path = UserList;
+			sourceTree = "<group>";
+		};
+		11DAF8F821F6AE0100F6729D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				11DAF8F021F651C800F6729D /* UIColor+Tints.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -153,8 +176,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11DAF8F521F69EF500F6729D /* UserListCell.xib in Resources */,
 				11DAF8DE21F5EB2D00F6729D /* LaunchScreen.storyboard in Resources */,
 				11DAF8DB21F5EB2D00F6729D /* Assets.xcassets in Resources */,
+				11DAF8FC21F6CE1200F6729D /* LoadingCell.xib in Resources */,
 				11DAF8D921F5EB2D00F6729D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -166,10 +191,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11DAF8F421F69EF500F6729D /* UserListCell.swift in Sources */,
 				11DAF8EA21F605CE00F6729D /* NetworkService.swift in Sources */,
 				11DAF8EE21F62E2400F6729D /* UserListViewController.swift in Sources */,
 				11DAF8D421F5EB2D00F6729D /* AppDelegate.swift in Sources */,
+				11DAF8FB21F6CE1200F6729D /* LoadingCell.swift in Sources */,
 				11DAF8EC21F60FE800F6729D /* User.swift in Sources */,
+				11DAF8F121F651C800F6729D /* UIColor+Tints.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,7 +340,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "Test-Apps.RandomUsers";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -326,7 +354,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "Test-Apps.RandomUsers";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
