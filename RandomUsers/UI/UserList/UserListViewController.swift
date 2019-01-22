@@ -24,7 +24,7 @@ class UserListViewController: UITableViewController {
         let userNib = UINib(nibName: userCellName, bundle: nil)
         tableView.register(userNib, forCellReuseIdentifier:userCellName)
         
-        let loadingCellNib = UINib(nibName: "LoadingCell", bundle: nil)
+        let loadingCellNib = UINib(nibName: loadingCellName, bundle: nil)
         tableView.register(loadingCellNib, forCellReuseIdentifier: loadingCellName)
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
@@ -86,6 +86,9 @@ class UserListViewController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == segueIdentifier {
+            let descriptionVC: UserDescriptionViewController = segue.destination as! UserDescriptionViewController
+            descriptionVC.user = users[tableView.indexPathForSelectedRow!.row]
+            descriptionVC.navigationItem.title = "Reach out to"
         }
     }
 
