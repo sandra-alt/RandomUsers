@@ -8,7 +8,11 @@
 
 import UIKit
 
-class UserDescriptionViewController: UITableViewController {
+protocol ReachOutDelegate: class {
+    func callNumber(phoneNumber: String)
+}
+
+class UserDescriptionViewController: UITableViewController, ReachOutDelegate {
 
     private let pictureCellName = "UserPictureCell"
     private let contactCellName = "ContactInfoCell"
@@ -29,7 +33,7 @@ class UserDescriptionViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    // MARK: - Table view data source
+    // MARK: - Table View
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -40,29 +44,41 @@ class UserDescriptionViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch indexPath.row {
-        case 0:
+        
+        if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: pictureCellName, for: indexPath) as! UserPictureCell
             cell.configureCellFor(user: user!)
             return cell
-        case 1:
+        } else {
             let contactCell = tableView.dequeueReusableCell(withIdentifier: contactCellName, for: indexPath) as! ContactInfoCell
-            contactCell.contactButton.setTitle(user!.phone, for: .normal)
-            contactCell.iconView.image = UIImage(named: "phone")
+            switch indexPath.row {
+            case 1:
+                contactCell.configureCellFor(info: user!.phone, type: .phone)
+            case 2:
+                contactCell.configureCellFor(info: user!.cell, type: .cellPhone)
+            default:
+                contactCell.configureCellFor(info: user!.email, type: .email)
+            }
+            contactCell.delegate = self
             return contactCell
-        case 2:
-            let contactCell = tableView.dequeueReusableCell(withIdentifier: contactCellName, for: indexPath) as! ContactInfoCell
-            contactCell.contactButton.setTitle(user!.cell, for: .normal)
-            contactCell.iconView.image = UIImage(named: "cell_phone")
-            return contactCell
-        case 3:
-            let contactCell = tableView.dequeueReusableCell(withIdentifier: contactCellName, for: indexPath) as! ContactInfoCell
-            contactCell.contactButton.setTitle(user!.email, for: .normal)
-            contactCell.iconView.image = UIImage(named: "email")
-            return contactCell
-        default:
-            return UITableViewCell()
         }
-
+    }
+    
+    //MARK: - ReachOut Delegate
+    
+    func callNumber(phoneNumber:String) {
+        let alertController = UIAlertController(title: phoneNumber, message: "Would you like to make a call?", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "No", style: .default, handler: nil))
+        alertController.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+            if let phoneCallURL = URL(string: "tel://\(phoneNumber)") {
+                
+                let application:UIApplication = UIApplication.shared
+                if (application.canOpenURL(phoneCallURL)) {
+                    application.open(phoneCallURL, options: [:], completionHandler: nil)
+                }
+            }
+        }))
+        present(alertController, animated: true, completion:{})
+        return
     }
 }
